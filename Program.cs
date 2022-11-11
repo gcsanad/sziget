@@ -10,6 +10,8 @@ namespace ConsoleApp11
             const char TENGER_JEL = '*';
             const char SZIGET_JEL = 'O';
             const char HAJO_JEL = '█';
+
+
             /*
             char[,] tenger = new char[SOROK_SZAMA, OSZLOPOK_SZAMA];
             */
@@ -33,6 +35,8 @@ namespace ConsoleApp11
             Random vel = new Random();
             for (int i = 0; i < 50; i++)
             {
+
+                //Szélen lévő szigetek keresése
                 int veloszlop = vel.Next(tenger.GetLength(1));
                 int velsor = vel.Next(tenger.GetLength(0));
                 if (veloszlop == 0 || veloszlop == 59)
@@ -47,6 +51,8 @@ namespace ConsoleApp11
                 {
                     szigetszel += 1;
                 }
+
+                //Szomszédos szigetek keresése
                 try
                 {
                     if (tenger[velsor + 1, veloszlop] == SZIGET_JEL)
@@ -54,6 +60,14 @@ namespace ConsoleApp11
                         vanESzomszed = true;
                     }
                     else if (tenger[velsor - 1, veloszlop] == SZIGET_JEL)
+                    {
+                        vanESzomszed = true;
+                    }
+                    else if (tenger[velsor, veloszlop+1] == SZIGET_JEL)
+                    {
+                        vanESzomszed = true;
+                    }
+                    else if (tenger[velsor, veloszlop-1] == SZIGET_JEL)
                     {
                         vanESzomszed = true;
                     }
@@ -69,6 +83,7 @@ namespace ConsoleApp11
             Megjelenit(tenger);
 
 
+
             static void Megjelenit(char[,] terkep)
             {
                 Console.Clear();
@@ -81,7 +96,11 @@ namespace ConsoleApp11
                     Console.WriteLine();
                 }
             }
-
+            static void Hajo(char[,] terkep, int kx, int ky)
+            {
+                terkep[kx, ky] = HAJO_JEL;
+            }
+            
             //1) Hány sziget van a tengeren?
 
             Console.WriteLine($"{szigetszam}db sziget van!");
@@ -101,13 +120,14 @@ namespace ConsoleApp11
                 vaneszomszed = "Nincs(enek)";
             }
             Console.WriteLine($"{vaneszomszed}szomszédos sziget(ek)!");
-
+            Console.ReadKey();
             //4) Hajó készítése!
+
+
+
+
             
-            static void Hajo(int kx, int ky)
-            {
-                
-            }
+            Console.ReadKey();
 
         }
 
